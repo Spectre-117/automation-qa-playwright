@@ -2,14 +2,16 @@
 import {defineConfig, devices} from '@playwright/test';
 import globalSetup from './global-setup.js';
 import globalTeardown from './global-teardown.js';
+import config from '../automation-qa-playwright/config/config.js';  // import config file with environment variables
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+//import dotenv from 'dotenv';
+//import path from 'path';
+//dotenv.config({ path: path.resolve(__dirname, '.env') });
+//dotenv.config();
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -40,11 +42,14 @@ export default defineConfig({
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('')`. */
-        baseURL: 'https://qauto.forstudy.space',
+        baseURL: config.baseURL,
+        //baseURL: process.env.BASE_URL,
         /* credentials if site needs them to open page*/
         httpCredentials: {
-            username: 'guest',
-            password: 'welcome2qauto'
+            username: config.credentials.userName,
+            password: config.credentials.userPassword,
+            //username: process.env.HTTP_CREDENTIALS_USERNAME,
+            //password: process.env.HTTP_CREDENTIALS_PASSWORD,
         },
         screenshot: 'only-on-failure',
         /* size of the opened browser window*/
