@@ -1,0 +1,10 @@
+{
+  "title": "Name is invalid (with special char *)",
+  "input": {
+    "email": "test@"
+  },
+  "expected": {
+    "message": "Email is incorrect",
+    "borderColor": "rgb(220, 53, 69)"
+  }
+}

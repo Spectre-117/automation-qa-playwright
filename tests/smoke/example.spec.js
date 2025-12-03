@@ -18,7 +18,7 @@ test.describe('Playwright homepage', () => {
         await expect(page).toHaveTitle(/Playwright/);
     });
 
-    test('get started link @smoke', async ({page}) => {
+    test('get started link', async ({page}) => {
         await page.goto('https://playwright.dev/');
 
         // Click the get started link.

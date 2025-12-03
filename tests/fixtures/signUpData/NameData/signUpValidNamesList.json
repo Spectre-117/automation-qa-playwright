@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Name with 2 characters length",
+    "input": {
+      "name": "Na"
+    },
+    "expected": {
+      "borderColor": "rgb(206, 212, 218)"
+    }
+  },
+  {
+    "title": "Name with 4 characters length",
+    "input": {
+      "name": "NameName"
+    },
+    "expected": {
+      "borderColor": "rgb(206, 212, 218)"
+    }
+  },
+  {
+    "title": "Name with 20 character length",
+    "input": {
+      "name": "NameNameNameNameName"
+    },
+    "expected": {
+      "borderColor": "rgb(206, 212, 218)"
+    }
+  }
+]
+

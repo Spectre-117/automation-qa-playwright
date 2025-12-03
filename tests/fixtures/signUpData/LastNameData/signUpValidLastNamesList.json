@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Last name with 2 characters length",
+    "input": {
+      "name": "Ln"
+    },
+    "expected": {
+      "borderColor": "rgb(206, 212, 218)"
+    }
+  },
+  {
+    "title": "Last name with 5 characters length",
+    "input": {
+      "name": "Lname"
+    },
+    "expected": {
+      "borderColor": "rgb(206, 212, 218)"
+    }
+  },
+  {
+    "title": "Last name with 20 character length",
+    "input": {
+      "name": "LnameLnameLnameLname"
+    },
+    "expected": {
+      "borderColor": "rgb(206, 212, 218)"
+    }
+  }
+]
+

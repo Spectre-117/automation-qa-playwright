@@ -23,7 +23,7 @@ export default defineConfig([
             'max-len': ['error', {
                 code: 100, // Maximum characters for code lines
                 tabWidth: 2, // Character width for tab characters
-                comments: 120, // Maximum characters for comment lines
+                comments: 130, // Maximum characters for comment lines
                 ignoreUrls: true, // Ignore URLs when calculating line length
                 ignoreStrings: true, // Ignore string literals
                 ignoreTemplateLiterals: true, // Ignore template literals

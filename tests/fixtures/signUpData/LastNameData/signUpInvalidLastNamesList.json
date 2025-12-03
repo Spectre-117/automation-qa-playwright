@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Last name is invalid (with special char *)",
+    "input": {
+      "name": "LNa*me"
+    },
+    "expected": {
+      "message": "Last name is invalid",
+      "borderColor": "rgb(220, 53, 69)"
+    }
+  },
+  {
+    "title": "Last name with 1 character length",
+    "input": {
+      "name": "L"
+    },
+    "expected": {
+      "message": "Last name has to be from 2 to 20 characters long",
+      "borderColor": "rgb(220, 53, 69)"
+    }
+  },
+  {
+    "title": "Last name with 21 character length",
+    "input": {
+      "name": "LnameLnameLnameLnameL"
+    },
+    "expected": {
+      "message": "Last name has to be from 2 to 20 characters long",
+      "borderColor": "rgb(220, 53, 69)"
+    }
+  }
+]
+
