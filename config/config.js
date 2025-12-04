@@ -3,8 +3,8 @@ dotenv.config();
 
 export default {
     baseUrl : process.env.BASE_URL,
-    credentials : {
-        userName: process.env.HTTP_CREDENTIALS_USERNAME,
-        userPassword: process.env.HTTP_CREDENTIALS_PASSWORD
+    httpCredentials : {
+        username: process.env.HTTP_CREDENTIALS_USERNAME,
+        password: process.env.HTTP_CREDENTIALS_PASSWORD
     },
 };

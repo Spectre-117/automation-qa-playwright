@@ -1,0 +1,9 @@
+  {
+    "title": "Email is valid",
+    "input": {
+      "email": "slia-test@test.com"
+    },
+    "expected": {
+      "borderColor": "rgb(206, 212, 218)"
+    }
+  }

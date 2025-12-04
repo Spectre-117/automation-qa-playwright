@@ -42,15 +42,16 @@ export default defineConfig({
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('')`. */
-        baseURL: config.baseURL,
+        baseURL: config.baseUrl,
         //baseURL: process.env.BASE_URL,
         /* credentials if site needs them to open page*/
         httpCredentials: {
-            username: config.credentials.userName,
-            password: config.credentials.userPassword,
+            username: config.httpCredentials.username,
+            password: config.httpCredentials.password,
             //username: process.env.HTTP_CREDENTIALS_USERNAME,
             //password: process.env.HTTP_CREDENTIALS_PASSWORD,
         },
+        //httpCredentials: config.httpCredentials,
         screenshot: 'only-on-failure',
         /* size of the opened browser window*/
         viewport: {width: 1280, height: 720},
@@ -69,11 +70,11 @@ export default defineConfig({
             use: {...devices['Desktop Chrome']},
         },
         {
-            name: 'regression',
-            grepInvert: /@smoke/,  /* first option how to say which tests should NOT be run. @smoke - label in test title */
-            //testMatch: /\/regression\/.*\.spec\.js/, /* second option how to say where test files */
+            name: 'change',
+            //grep: /@change/,
+            testMatch: /\/tests\/change\/signUp\/.*\.spec\.js/,
             use: {...devices['Desktop Chrome']},
-        }
+        },
         //
         // {
         //   name: 'firefox',
