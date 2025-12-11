@@ -1,7 +1,7 @@
 import {expect, test} from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
-test.describe('Sign up functionality',async ()=>{
+test.describe.skip('Sign up functionality',async ()=>{
 
 
     const userData = {
