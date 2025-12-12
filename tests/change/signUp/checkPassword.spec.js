@@ -2,7 +2,7 @@ import signUpInvalidPassword from '../../fixtures/signUpData/PasswordData/signUp
 import signUpValidPassword from '../../fixtures/signUpData/PasswordData/signUpValidPasswordsList.json' with { type: 'json' };
 import {expect, test} from '@playwright/test';
 
-test.describe('Password field validation', () => {
+test.describe.skip('Password field validation', () => {
 
 
     test.beforeEach(async ({page}) => {

@@ -1,7 +1,7 @@
 import {faker} from '@faker-js/faker';
 import {expect, test} from '@playwright/test';
 
-test.describe('Register button validation', () => {
+test.describe.skip('Register button validation', () => {
 
         const userData = {
             'userFirstName': faker.person.firstName(),

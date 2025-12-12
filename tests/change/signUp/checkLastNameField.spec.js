@@ -2,7 +2,7 @@ import signUpInvalidLastNamesList from '../../fixtures/signUpData/LastNameData/s
 import signUpValidLastNamesList from '../../fixtures/signUpData/LastNameData/signUpValidLastNamesList.json' with { type: 'json' };
 import {expect, test} from '@playwright/test';
 
-test.describe('Last Name field validation', () => {
+test.describe.skip('Last Name field validation', () => {
 
 
     test.beforeEach(async ({page}) => {

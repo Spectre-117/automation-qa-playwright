@@ -72,7 +72,7 @@ export default defineConfig({
         {
             name: 'change',
             //grep: /@change/,
-            testMatch: /\/tests\/change\/signUp\/.*\.spec\.js/,
+            testMatch: /\/tests\/change\/.*\.spec\.js/,
             use: {...devices['Desktop Chrome']},
         },
         //
