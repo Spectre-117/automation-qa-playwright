@@ -3,7 +3,7 @@ import signUpValidReEnterPassword from '../../fixtures/signUpData/ReEnterPasswor
 import {expect, test} from '@playwright/test';
 import MainPage from '../../../src/pageObjects/mainPage/MainPage.js';
 
-test.describe.skip('Repeat password field validation', () => {
+test.describe('Repeat password field validation', () => {
 
 
     let mainPage;
@@ -17,8 +17,7 @@ test.describe.skip('Repeat password field validation', () => {
         test(title, async () => {
 
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillPassword(input.password);
-            await signUpForm.fillRepeatPassword(input.repeatPassword);
+            await signUpForm.signUpFillForm({'password': input.password, 'repeatPassword': input.repeatPassword});
 
             await expect(signUpForm.uRepeatPassword).toHaveCSS('border-color', expected.borderColor);
         });
@@ -26,8 +25,9 @@ test.describe.skip('Repeat password field validation', () => {
 
     test('Re-enter password required', async () => {
         const signUpForm = await mainPage.openSignInForm();
-        await signUpForm.fillPassword(signUpValidReEnterPassword[0].input.password);
-        await signUpForm.fillEmptyRepeatPassword();
+        await signUpForm.signUpFillForm({'password': signUpValidReEnterPassword[0].input.password});
+        await signUpForm.uRepeatPassword.focus();
+        await signUpForm.uRepeatPassword.blur();
 
         await expect(signUpForm.uRepeatPassword).toHaveCSS('border-color', signUpInvalidReEnterPassword[0].expected.borderColor);
         await expect(signUpForm.invalidFeedback).toHaveText('Re-enter password required');
@@ -37,8 +37,7 @@ test.describe.skip('Repeat password field validation', () => {
     for (const {title, input, expected} of signUpInvalidReEnterPassword) {
         test(title, async () => {
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillPassword(input.password);
-            await signUpForm.fillRepeatPassword(input.repeatPassword);
+            await signUpForm.signUpFillForm({'password': input.password, 'repeatPassword': input.repeatPassword});
 
             await expect(signUpForm.invalidFeedback).toHaveText(expected.message);
             await expect(signUpForm.uRepeatPassword).toHaveCSS('border-color', expected.borderColor);

@@ -56,7 +56,7 @@ export default defineConfig({
         /* size of the opened browser window*/
         viewport: {width: 1280, height: 720},
         /* Allow to implement test without opening browser if option is 'true'*/
-        headless: false,
+        headless: true,
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'retain-on-failure',
     },

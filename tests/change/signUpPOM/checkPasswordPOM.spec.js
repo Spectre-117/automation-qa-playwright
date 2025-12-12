@@ -3,7 +3,7 @@ import signUpValidPassword from '../../fixtures/signUpData/PasswordData/signUpVa
 import {expect, test} from '@playwright/test';
 import MainPage from '../../../src/pageObjects/mainPage/MainPage.js';
 
-test.describe.skip('Password field validation', () => {
+test.describe('Password field validation', () => {
 
     let mainPage;
 
@@ -15,7 +15,7 @@ test.describe.skip('Password field validation', () => {
     for (const {title, input, expected} of signUpValidPassword) {
         test(title, async () => {
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillPassword(input.password);
+            await signUpForm.signUpFillForm({'password': input.password});
 
             await expect(signUpForm.uPassword).toHaveCSS('border-color', expected.borderColor);
         });
@@ -23,7 +23,8 @@ test.describe.skip('Password field validation', () => {
 
     test('Password is required', async () => {
         const signUpForm = await mainPage.openSignInForm();
-        await signUpForm.fillEmptyPassword();
+        await signUpForm.uPassword.focus();
+        await signUpForm.uPassword.blur();
 
         await expect(signUpForm.uPassword).toHaveCSS('border-color', signUpInvalidPassword[0].expected.borderColor);
         await expect(signUpForm.invalidFeedback).toHaveText('Password required');
@@ -33,7 +34,7 @@ test.describe.skip('Password field validation', () => {
     for (const {title, input, expected} of signUpInvalidPassword) {
         test(title, async () => {
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillPassword(input.password);
+            await signUpForm.signUpFillForm({'password': input.password});
 
             await expect(signUpForm.uPassword).toHaveCSS('border-color', expected.borderColor);
             await expect(signUpForm.invalidFeedback).toHaveText(expected.message);

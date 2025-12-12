@@ -4,7 +4,7 @@ import MainPage from '../../../src/pageObjects/mainPage/MainPage.js';
 import {expect, test} from '@playwright/test';
 
 
-test.describe.skip('Name field validation', () => {
+test.describe('Name field validation', () => {
 
     let mainPage;
     test.beforeEach(async ({page}) => {
@@ -17,14 +17,15 @@ test.describe.skip('Name field validation', () => {
         test(title, async () => {
 
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillFirstName(input.name);
+            await signUpForm.signUpFillForm({'name': input.name});
             await expect(signUpForm.firstName).toHaveCSS('border-color', expected.borderColor);
         });
     }
 
     test('Name is required', async () => {
         const signUpForm = await mainPage.openSignInForm();
-        await signUpForm.fillEmptyFirstName();
+        await signUpForm.firstName.focus();
+        await signUpForm.firstName.blur();
         await expect(signUpForm.firstName).toHaveCSS('border-color', signUpInvalidNamesList[0].expected.borderColor);
         await expect(signUpForm.invalidFeedback).toHaveText('Name required');
     });
@@ -33,7 +34,7 @@ test.describe.skip('Name field validation', () => {
     for (const {title, input, expected} of signUpInvalidNamesList) {
         test(title, async () => {
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillFirstName(input.name);
+            await signUpForm.signUpFillForm({'name': input.name});
             await expect(signUpForm.firstName).toHaveCSS('border-color', expected.borderColor);
             await expect(signUpForm.invalidFeedback).toHaveText(expected.message);
         });

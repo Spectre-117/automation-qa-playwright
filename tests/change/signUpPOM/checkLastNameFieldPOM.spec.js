@@ -3,7 +3,8 @@ import signUpValidLastNamesList from '../../fixtures/signUpData/LastNameData/sig
 import {expect, test} from '@playwright/test';
 import MainPage from '../../../src/pageObjects/mainPage/MainPage.js';
 
-test.describe.skip('Last Name field validation', () => {
+
+test.describe('Last Name field validation', () => {
 
     let mainPage;
 
@@ -16,14 +17,15 @@ test.describe.skip('Last Name field validation', () => {
     for (const {title, input, expected} of signUpValidLastNamesList) {
         test(title, async () => {
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillLastName(input.name);
+            await signUpForm.signUpFillForm({'lastName': input.name});
             await expect(signUpForm.lastName).toHaveCSS('border-color', expected.borderColor);
         });
     }
 
     test('Last name is required', async () => {
         const signUpForm = await mainPage.openSignInForm();
-        await signUpForm.fillEmptyLastName();
+        await signUpForm.lastName.focus();
+        await signUpForm.lastName.blur();
 
         await expect(signUpForm.lastName).toHaveCSS('border-color', signUpInvalidLastNamesList[0].expected.borderColor);
         await expect(signUpForm.invalidFeedback).toHaveText('Last name required');
@@ -33,7 +35,7 @@ test.describe.skip('Last Name field validation', () => {
     for (const {title, input, expected} of signUpInvalidLastNamesList) {
         test(title, async () => {
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillLastName(input.name);
+            await signUpForm.signUpFillForm({'lastName': input.name});
 
             await expect(signUpForm.invalidFeedback).toHaveText(expected.message);
             await expect(signUpForm.lastName).toHaveCSS('border-color', expected.borderColor);

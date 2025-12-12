@@ -1,7 +1,7 @@
 import {faker} from '@faker-js/faker';
 import {expect, test} from '@playwright/test';
 import MainPage from '../../../src/pageObjects/mainPage/MainPage.js';
-import UserMainPage from '../../../src/pageObjects/mainPage/UserMainPage.js';
+import GaragePage from '../../../src/pageObjects/mainPage/GaragePage.js';
 
 test.describe('Register button validation', () => {
 
@@ -24,22 +24,27 @@ test.describe('Register button validation', () => {
         test('Register button is enabled if input data is correct', async () => {
 
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.signUpFillForm(userData.userFirstName,
-                userData.userLastName,
-                userData.userEmail,
-                userData.userPassword);
+            await signUpForm.signUpFillForm({'name':userData.userFirstName,
+                'lastName':userData.userLastName,
+                'email':userData.userEmail,
+                'password':userData.userPassword,
+                'repeatPassword':userData.userPassword
+            });
 
             await expect(signUpForm.signInButton).toBeEnabled();
         });
 
         test('User can be registered with valid data', async ({page}) => {
-            userMainPage = new UserMainPage(page);
+            userMainPage = new GaragePage(page);
 
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.signUpFillForm(userData.userFirstName,
-                userData.userLastName,
-                userData.userEmail,
-                userData.userPassword);
+
+            await signUpForm.signUpFillForm({'name':userData.userFirstName,
+                'lastName':userData.userLastName,
+                'email':userData.userEmail,
+                'password':userData.userPassword,
+                'repeatPassword':userData.userPassword
+            });
 
             await signUpForm.signInButton.click();
 
@@ -47,45 +52,56 @@ test.describe('Register button validation', () => {
             await expect(userMainPage.addCarButton).toBeEnabled();
         });
 
-        test('Register button is disabled if input data is incorrect', async ({page}) => {
+        test('Register button is disabled if input data is incorrect', async () => {
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.signUpFillForm('Name4',
-                userData.userLastName,
-                userData.userEmail,
-                userData.userPassword);
+            await signUpForm.signUpFillForm({'name':'Name4',
+                'lastName':userData.userLastName,
+                'email':userData.userEmail,
+                'password':userData.userPassword,
+                'repeatPassword':userData.userPassword
+            });
 
             await expect(signUpForm.signInButton).toBeDisabled();
         });
 
-        test('Register button is disabled if input data is missed', async ({page}) => {
+        test('Register button is disabled if input data is missed', async () => {
 
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.fillEmptyFirstName();
-            await signUpForm.fillLastName(userData.userLastName);
-            await signUpForm.fillEmail(userData.userEmail);
-            await signUpForm.fillPassword(userData.userPassword);
-            await signUpForm.fillRepeatPassword(userData.userPassword);
+
+            await signUpForm.firstName.focus();
+            await signUpForm.firstName.blur();
+            await signUpForm.signUpFillForm({
+                'lastName':userData.userLastName,
+                'email':userData.userEmail,
+                'password':userData.userPassword,
+                'repeatPassword':userData.userPassword
+            });
 
             await expect(signUpForm.signInButton).toBeDisabled();
         });
 
-        test('Register button is disabled if input data in Name field is out of bounds (lees than 2 characters)', async ({page}) => {
+        test('Register button is disabled if input data in Name field is out of bounds (lees than 2 characters)', async () => {
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.signUpFillForm('N',
-                userData.userLastName,
-                userData.userEmail,
-                userData.userPassword);
+
+            await signUpForm.signUpFillForm({'name':'N',
+                'lastName':userData.userLastName,
+                'email':userData.userEmail,
+                'password':userData.userPassword,
+                'repeatPassword':userData.userPassword
+            });
 
             await expect(signUpForm.signInButton).toBeDisabled();
         });
 
-        test('Register button is disabled if input data in Name field is out of bounds (more than 20 characters)', async ({page}) => {
+        test('Register button is disabled if input data in Name field is out of bounds (more than 20 characters)', async () => {
 
             const signUpForm = await mainPage.openSignInForm();
-            await signUpForm.signUpFillForm('NameNameNameNameNameN',
-                userData.userLastName,
-                userData.userEmail,
-                userData.userPassword);
+            await signUpForm.signUpFillForm({'name':'NameNameNameNameNameN',
+                'lastName':userData.userLastName,
+                'email':userData.userEmail,
+                'password':userData.userPassword,
+                'repeatPassword':userData.userPassword
+            });
 
             await expect(signUpForm.signInButton).toBeDisabled();
         });
