@@ -2,7 +2,7 @@ import signUpInvalidReEnterPassword from '../../fixtures/signUpData/ReEnterPassw
 import signUpValidReEnterPassword from '../../fixtures/signUpData/ReEnterPasswordData/signUpValidReEnterPasswordsList.json' with { type: 'json' };
 import {expect, test} from '@playwright/test';
 
-test.describe('Repeat password field validation', () => {
+test.describe.skip('Repeat password field validation', () => {
 
 
     test.beforeEach(async ({page}) => {

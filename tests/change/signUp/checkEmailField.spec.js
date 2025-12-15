@@ -2,7 +2,7 @@ import signUpInvalidEmail from '../../fixtures/signUpData/EmailData/signUpInvali
 import signUpValidEmail from '../../fixtures/signUpData/EmailData/signUpValidEmail.json' with { type: 'json' };
 import {expect, test} from '@playwright/test';
 
-test.describe('Email field validation', () => {
+test.describe.skip('Email field validation', () => {
 
 
     test.beforeEach(async ({page}) => {

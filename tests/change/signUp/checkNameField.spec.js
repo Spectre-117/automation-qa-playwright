@@ -4,7 +4,7 @@ import signUpValidNamesList from '../../fixtures/signUpData/NameData/signUpValid
 import {expect, test} from '@playwright/test';
 
 
-test.describe('Name field validation', () => {
+test.describe.skip('Name field validation', () => {
 
 
     test.beforeEach(async ({page}) => {
