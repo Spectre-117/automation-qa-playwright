@@ -2,7 +2,7 @@
 import {defineConfig, devices} from '@playwright/test';
 import globalSetup from './global-setup.js';
 import globalTeardown from './global-teardown.js';
-import config from '../automation-qa-playwright/config/config.js';  // import config file with environment variables
+import config from './config/config.js';  // import config file with environment variables
 
 /**
  * Read environment variables from file.
