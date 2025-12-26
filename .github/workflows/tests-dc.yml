@@ -1,0 +1,32 @@
+name: "Autotests with Docker-compose"
+
+on:
+  workflow_dispatch:
+  pull_request:
+      types: [opened,synchronize]
+
+jobs:
+  playwright-tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v4
+      - name: "Install Docker-compose"
+        uses: KengoTODA/actions-setup-docker-compose@v1
+        with:
+          version: '2.14.2' # the full version of `docker-compose` command
+      - name: "Run tests"
+        run: docker-compose up --exit-code-from auto-tests   # exit-code-from {name of service in docker-compose file} - used for shutting down pipeline after Docker finishes tests
+        env:
+          BASE_URL: ${{secrets.BASE_URL}}
+          HTTP_CREDENTIALS_USERNAME: ${{secrets.HTTP_CREDENTIALS_USERNAME}}
+          HTTP_CREDENTIALS_PASSWORD: ${{secrets.HTTP_CREDENTIALS_PASSWORD}}
+      - name: "Upload report"
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: playwright-report/
+          retention-days: 3
+
+
