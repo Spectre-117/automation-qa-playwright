@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  auto-tests:
+    container_name: playwright-tests
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./playwright-report:/pw-tests/playwright-report
+    environment:
+      CI: true
+      BASE_URL: https://qauto.forstudy.space
+      HTTP_CREDENTIALS_USERNAME: guest
+      HTTP_CREDENTIALS_PASSWORD: welcome2qauto
+#     env_file:  # optionaly can add .env file with variables
+#     - .env
+
+
