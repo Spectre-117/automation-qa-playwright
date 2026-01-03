@@ -26,7 +26,7 @@ export default defineConfig({
     /* Folder with test files*/
     //testDir: './tests',
     /*alternative way to indicate the template of test files*/
-    testMatch: /\/tests\/.*\.spec\.js/,
+    testMatch: /\/tests\/.*\.(spec|test)\.js/,
     /* Run tests in files in parallel. If 'true' then don't use before all and after all
     - can be performed not only once */
     fullyParallel: false,
@@ -58,7 +58,7 @@ export default defineConfig({
         /* size of the opened browser window*/
         viewport: {width: 1280, height: 720},
         /* Allow to implement test without opening browser if option is 'true'*/
-        headless: true,
+        headless: false,
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'retain-on-failure',
     },
@@ -74,7 +74,7 @@ export default defineConfig({
         {
             name: 'change',
             //grep: /@change/,
-            testMatch: /\/tests\/change\/.*\.spec\.js/,
+            testMatch: /\/tests\/(change|setup)\/.*\.(spec|setup)\.js/,
             use: {...devices['Desktop Chrome']},
         },
         //
